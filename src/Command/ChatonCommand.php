@@ -31,18 +31,25 @@ class ChatonCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
+        $faker = \Faker\Factory::create();
+
+        $faker = Factory::create();
+
+        for ($i = 0; $i < 10; $i++) {
+            $chamallot = new ChatTigré();
+            $chamallot->setNom($faker->name);
+            $chamallot->setMignonneté($faker->numberBetween(50, 200));
+            $chamallot->setTaille($faker->numberBetween(1, 55));
+            $chamallot->setMoustacheLength($faker->numberBetween(1, 10));
+
+            $this->entityManager->persist($chamallot);
         }
 
-        if ($input->getOption('option1')) {
-            // ...
-        }
+        $this->entityManager->flush();
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $output->writeln('SoftKitten data added successfully.');
+
 
         return Command::SUCCESS;
     }
