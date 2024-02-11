@@ -1,0 +1,22 @@
+{# Learn how to use Turbo Streams: https://github.com/symfony/ux-turbo#broadcast-doctrine-entities-update #}
+{% block create %}
+<turbo-stream action="append" target="chat_tigr">
+    <template>
+        <div id="{{ 'chat_tigr__' ~ id }}">
+            #{{ id }} created
+        </div>
+    </template>
+</turbo-stream>
+{% endblock %}
+
+{% block update %}
+<turbo-stream action="update" target="chat_tigr__{{ id }}">
+    <template>
+        #{{ id }} updated
+    </template>
+</turbo-stream>
+{% endblock %}
+
+{% block remove %}
+<turbo-stream action="remove" target="chat_tigr__{{ id }}"></turbo-stream>
+{% endblock %}
